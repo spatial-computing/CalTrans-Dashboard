@@ -6,6 +6,8 @@ $(document).ready(function() {
 	$(window).scroll(function() {
 		styleNavbar();
 	});
+
+	getGeneralInfo();
 });
 
 function styleNavbar() {
@@ -18,6 +20,20 @@ function styleNavbar() {
 	else {
 		$('nav').addClass('white');
 	}
+}
+
+function getGeneralInfo() {
+	var generalInfoUrl = 'http://localhost:8080/metransws/generalinfo';
+	$.ajax({
+		type: 'GET',
+		url: generalInfoUrl,
+		dataType: "json",
+		success: function(data) {
+			$("#numbuslines").text(data["numBusLines"]);
+			$("#numbusstops").text(data["numBusStops"]);
+			$("#numdatapoints").text(data["numDataPoints"]);
+		}
+	});
 }
 
 /* get data */
